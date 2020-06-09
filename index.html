@@ -17,7 +17,7 @@
         padding: 5px 10px;
       }
       #url-input-submit {
-        background: #00BFFF;
+        background: #00CC00;
         border: none;
         color: #FFF;
         font: 16px "Segoe UI", "Arial", sans-serif;
@@ -25,10 +25,10 @@
         padding: 5px 10px;
       }
       #url-input-submit:hover {
-        background: #0080EE;
+        background: #00AA00;
       }
       #url-input-submit:active {
-        background: #0060CC;
+        background: #008000;
       }
       #log {
         min-width: 200px;
@@ -50,7 +50,7 @@
     <p>A simple video downloader.</p>
     <div style="display: flex;">
       <input type="text" id="url-input" placeholder="Video URL or YouTube&trade; Video ID" spellcheck="false">
-      <button id="url-input-submit" onclick="processInput(document.getElementById('url-input').value);">Get Video</button>
+      <button id="url-input-submit" onclick="processInput(document.getElementById('url-input').value);">Download Video</button>
     </div>
     <div id="file-format-options">
       <h2>Choose file format</h2>
@@ -73,8 +73,7 @@
     </div>
     <h2>Log</h2>
     <div id="log"></div>
-    <h2>Final download links</h2>
-    <div>Unimplemented</div>
+    <p><small>Powered by <a href="https://www.npmjs.com/package/ytdl-core" target="_blank">ytdl-core</a></small></p>
   </body>
   <script>
     function processInput(urlInput) {
