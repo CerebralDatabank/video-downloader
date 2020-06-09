@@ -5,7 +5,7 @@ const ytdl = require("ytdl-core");
 const app = express();
 
 app.get("/", (request, response) => {
-  response.sendFile("index.html");
+  response.sendFile("/index.html");
 });
 
 app.listen(process.env.PORT || 4000, () => {
