@@ -1,0 +1,26 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title></title>
+  </head>
+  <body>
+    <h1>Gopal's Video Downloader</h1>
+    <p>A simple video downloader.</p>
+    <div>
+      <input type="text" id="url-input" placeholder="Video URL or Video ID">
+      <button id="url-input-submit" onclick="processInput(document.getElementById('url-input').value);">Get Video</button>
+    </div>
+    <div id="video-options">
+      <h2>Choose video format</h2>
+      <select>
+        <option selected>Best available</option>
+      </select>
+    </div>
+    <div id="audio-only-options" style="display: none;">
+      <h2>Choose audio format</h2>
+      <select>
+        <option selected>Best available</option>
+      </select>
+    </div>
+  </body>
+</html>
