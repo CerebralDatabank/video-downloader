@@ -2,22 +2,24 @@
 <html>
   <head>
     <title>Gopal's Video Downloader</title>
+    <link type="text/css" href="./gogo.css">
     <style>
-      @import url("gogo.css");
       #url-input {
         background: #EEE;
         border: none;
         color: #333;
         font: 14px "Segoe UI", "Arial", sans-serif;
-        border-radius: 4px 0 4px 0;
+        border-radius: 4px 0 0 4px;
         width: 300px;
+        padding: 5px 10px;
       }
       #url-input-submit {
         background: #00BFFF;
         border: none;
         color: #FFF;
         font: 16px "Segoe UI", "Arial", sans-serif;
-        border-radius: 0 4px 0 4px;
+        border-radius: 0 4px 4px 0;
+        padding: 5px 10px;
       }
       #url-input-submit:hover {
         background: #0080EE;
@@ -29,6 +31,9 @@
         min-width: 200px;
         min-height: 100px;
         resize: both;
+        overflow: auto;
+        padding: 10px;
+        font: 14px "Consolas", monospace;
       }
       select, option {
         font-size: 20px;
@@ -38,7 +43,7 @@
   <body>
     <h1>Gopal's Video Downloader</h1>
     <p>A simple video downloader.</p>
-    <div>
+    <div style="display: flex;">
       <input type="text" id="url-input" placeholder="Video URL or YouTube&trade; Video ID" spellcheck="false">
       <button id="url-input-submit" onclick="processInput(document.getElementById('url-input').value);">Get Video</button>
     </div>
@@ -46,7 +51,7 @@
       <h2>Choose file format</h2>
       <select id="select-file-format">
         <option value="mp4" selected>MP4 (MPEG-4)</option>
-        <option value="flv" selected>FLV (Flash Video)</option>
+        <option value="flv">FLV (Flash Video)</option>
       </select>
     </div>
     <div id="video-options">
@@ -61,8 +66,10 @@
         <option selected>Best available</option>
       </select>
     </div>
+    <h2>Log</h2>
     <div id="log"></div>
-    <div>Final download links</div>
+    <h2>Final download links</h2>
+    <div>Unimplemented</div>
   </body>
   <script>
     function processInput(urlInput) {
