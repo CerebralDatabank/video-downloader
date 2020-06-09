@@ -11,6 +11,10 @@ app.get("/", (request, response) => {
   response.sendFile("./index.html", {root: __dirname});
 });
 
+app.get("/gogo.css", (request, response) => {
+  response.sendFile("./gogo.css", {root: __dirname});
+});
+
 app.get("/downloader", (request, response) => {
   if (!request.query["video_url"] || !request.query["file_format"]) {
     request.status(400).send("400 Bad Request");
