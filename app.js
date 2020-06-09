@@ -9,7 +9,7 @@ app.get("/", (request, response) => {
 });
 
 app.get("/downloader", (request, response) => {
-  response.send(JSON.stringify(request));
+  response.send(request.params);
 });
 
 app.listen(process.env.PORT || 4000, () => {
