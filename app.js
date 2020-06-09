@@ -23,7 +23,7 @@ app.get("/downloader", (request, response) => {
     let url = request.query["video_url"];
     let fileformat = request.query["file_format"];
     response.header("Content-Disposition", `attachment; filename="downloaded-video.${fileformat}"`);
-    ytdl(url, {format: fileformat}).pipe(res);
+    ytdl(url, {format: fileformat}).pipe(response);
   }
 });
 
