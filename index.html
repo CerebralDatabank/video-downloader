@@ -82,9 +82,8 @@
       if (!urlInput.includes("/")) {
         urlInput = `https://youtube.com/watch?v=${urlInput}`;
       }
-      else {
-        location.href = `./downloader?video_url=${urlInput}&file_format=${chosenFileFormat}`;
-      }
+      else {}
+      location.href = `./downloader?video_url=${urlInput}&file_format=${chosenFileFormat}`;
     }
   </script>
 </html>
