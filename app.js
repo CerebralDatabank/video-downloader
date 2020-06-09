@@ -17,7 +17,7 @@ app.get("/gogo.css", (request, response) => {
 
 app.get("/downloader", (request, response) => {
   if (!request.query["video_url"] || !request.query["file_format"]) {
-    request.status(400).send("400 Bad Request");
+    response.status(400).send("400 Bad Request");
   }
   else {
     let url = request.query["video_url"];
