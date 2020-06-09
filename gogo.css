@@ -1,0 +1,288 @@
+/* GOGO CSS by Gopal Othayoth (cerebraldatabank@gmail.com, https://cerebraldatabank.neocities.org/)
+ * Version: v2.2.0
+ * Last Updated: 2019-08-22
+ * This file itself may not be distributed without express written/typed permission by Gopal Othayoth (cerebraldatabank@gmail.com). If you wish to share the code, please share this URL: https://cerebraldatabank.neocities.org/utilities/gogo_css.html
+ * The GOGO CSS Class Library was made by Gopal Othayoth (cerebraldatabank@gmail.com). All rights reserved.
+ * All Data URI images are also created by Gopal Othayoth and can be treated as part of the GOGO CSS Class Library
+ */
+
+/*Comment out below rule to not disable dotted borders*/
+::-moz-focus-inner {
+  border: none;
+}
+:-moz-focusring {
+  /*border: none;*/
+}
+
+.gogo-btn {
+  background: #EEEEEE;
+  border: 1px solid #CCCCCC;
+  color: #000000;
+  border-radius: 2px;
+  padding: 5px 10px;
+  font: 14px "Segoe UI", "Arial", sans-serif;
+  text-align: center;
+  text-decoration: none;
+  cursor: default;
+  -webkit-user-select: none;
+  -moz-user-select: none;
+  -ms-user-select: none;
+  -o-user-select: none;
+  -khtml-user-select: none;
+  user-select: none;
+}
+.gogo-btn:hover {
+  background: #DDDDDD;
+}
+.gogo-btn:active {
+  background: #CECECE;
+}
+.gogo-btn:disabled {
+  background: #EFEFEF;
+  opacity: 0.3;
+  cursor: not-allowed;
+}
+
+.gogo-disabled {
+  opacity: 0.3;
+  cursor: not-allowed;
+}
+
+.gogo-btn-big {
+  padding: 10px 20px;
+}
+
+.gogo-btn-blue {
+  background: #0099FF;
+  color: #FFFFFF;
+  border: 1px solid #0088EE;
+}
+.gogo-btn-blue:hover {
+  background: #0088EE;
+}
+.gogo-btn-blue:active {
+  background: #0055CC;
+}
+.gogo-btn-blue:disabled, .gogo-btn-blue.gogo-disabled {
+  background: #0099FF;
+}
+
+.gogo-btn-green {
+  background: #00AA00;
+  color: #FFFFFF;
+  border: 1px solid #008000;
+}
+.gogo-btn-green:hover {
+  background: #008000;
+}
+.gogo-btn-green:active {
+  background: #007000;
+}
+.gogo-btn-green:disabled, .gogo-btn-green.gogo-disabled {
+  background: #00AA00;
+}
+
+.gogo-btn-red {
+  background: #FF0000;
+  color: #FFFFFF;
+  border: 1px solid #CC0000;
+}
+.gogo-btn-red:hover {
+  background: #CC0000;
+}
+.gogo-btn-red:active {
+  background: #AA0000;
+}
+.gogo-btn-red:disabled {
+  background: #FF0000;
+}
+
+.gogo-btn-mint {
+  background: #3EB489;
+  color: #FFFFFF;
+  border: 1px solid #39A57E;
+}
+.gogo-btn-mint:hover {
+  background: #39A57E;
+}
+.gogo-btn-mint:active {
+  background: #278966;
+}
+.gogo-btn-mint:disabled {
+  background: #3EB489;
+}
+
+.gogo-btn-orange {
+  background: #FFA500;
+  color: #FFFFFF;
+  border: 1px solid #EE9400;
+}
+.gogo-btn-orange:hover {
+  background: #EE9400;
+}
+.gogo-btn-orange:active {
+  background: #CC8000;
+}
+.gogo-btn-orange:disabled {
+  background: #FFA500;
+}
+
+.gogo-btn-darkblue {
+  background: #0000EE;
+  color: #FFFFFF;
+  border: 1px solid #0000CC;
+}
+.gogo-btn-darkblue:hover {
+  background: #0000CC;
+}
+.gogo-btn-darkblue:active {
+  background: #0000AA;
+}
+.gogo-btn-darkblue:disabled {
+  background: #0000EE;
+}
+
+.gogo-btn-darkgray {
+  background: #222;
+  border: 1px solid #555;
+  color: #FFF;
+}
+.gogo-btn-darkgray:hover {
+  background: #333;
+}
+.gogo-btn-darkgray:active {
+  background: #444;
+}
+.gogo-btn-darkgray:disabled {
+  background: #222;
+  opacity: 0.6;
+  cursor: not-allowed;
+}
+
+.gogo-btn-small {
+  padding: 2px 4px;
+  min-width: 20px;
+}
+
+.gogo-btn-bigaction, .gogo-btn-dropdown, .gogo-btn-dropdown-options {
+  border: none;
+  font: 20px "Segoe UI", "Arial";
+  padding: 10px 20px;
+  border-radius: 4px;
+  display: inline-block;
+}
+.gogo-btn-dropdown {
+  border-radius: 4px 0 0 4px;
+}
+.gogo-btn-dropdown-options {
+  border-radius: 0 4px 4px 0;
+  padding: 10px 15px;
+  margin-left: 2px;
+}
+
+code, .gogo-default-code, .gogo-code, .gogo-filename, .gogo-monospace {
+  background: #222222;
+  color: #FFFFFF;
+  font-family: "Consolas", monospace;
+  font-size: 0.8em;
+  white-space: pre;
+  border-radius: 4px;
+  padding: 2px 4px;
+}
+var {
+  font-style: italic;
+}
+select {
+  background: #EEEEEE;
+  border: 1px solid #CCCCCC;
+  color: #000000;
+  border-radius: 2px;
+  padding: 2px 4px;
+  font: 14px "Segoe UI", "Arial";
+  text-decoration: none;
+  cursor: default;
+}
+select:disabled {
+  opacity: 0.6;
+  cursor: not-allowed;
+}
+
+/*Toggle Switch Start*/
+.gogo-toggle {
+  -webkit-appearance: none;
+  -moz-appearance: none;
+  -ms-appearance: none;
+  -o-appearance: none;
+  -khtml-appearance: none;
+  appearance: none;
+  width: 50px;
+  height: 25px;
+  display: inline-block;
+  position: relative;
+  background: #333333;
+  transition: background 100ms;
+  border: none;
+  border-radius: 2px;
+  outline: none;
+  overflow: hidden;
+  cursor: pointer;
+}
+.gogo-toggle:disabled {
+  opacity: 0.5;
+  cursor: not-allowed;
+}
+.gogo-toggle::before, .gogo-toggle-switch::before {
+  content: "ON OFF";
+  text-transform: uppercase;
+  font: bold 10px Arial, sans-serif;
+  white-space: nowrap;
+  display: block;
+  position: absolute;
+  top: 2px;
+  left: 2px;
+  width: 20px;
+  height: 20px;
+  line-height: 20px;
+  text-indent: -22px;
+  word-spacing: 28px;
+  background: #EEEEEE;
+  border: none;
+  border-radius: 2px;
+  color: #FFFFFF;
+  z-index: 2;
+  transition: all 100ms linear;
+}
+.gogo-toggle-offred {
+  background: #FF0000;
+}
+.gogo-toggle-onred:checked {
+  background: #FF0000;
+}
+.gogo-toggle:checked, .gogo-toggle-switch:checked {
+  background: #00CC00;
+}
+.gogo-toggle:checked::before, .gogo-toggle-switch:checked::before {
+  left: 28px;
+}
+.gogo-kbd {
+  background: linear-gradient(to bottom, #EEE, #DDD);
+  border: 1px solid #AAA;
+  border-radius: 2px;
+  box-shadow: 0 1px 2px #AAA;
+  display: inline-block;
+  text-align: center;
+  font: 0.8em "Segoe UI", "Arial", sans-serif;
+  padding: 2px 4px;
+  min-width: 1em;
+  min-height: 1em;
+}
+/*Toggle Switch End*/
+
+.gogo-unselectable {
+  -webkit-user-select: none;
+  -moz-user-select: none;
+  -ms-user-select: none;
+  -o-user-select: none;
+  -khtml-user-select: none;
+  user-select: none;
+}

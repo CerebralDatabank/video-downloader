@@ -1,26 +1,78 @@
 <!DOCTYPE html>
 <html>
   <head>
-    <title></title>
+    <title>Gopal's Video Downloader</title>
+    <style>
+      @import url("gogo.css");
+      #url-input {
+        background: #EEE;
+        border: none;
+        color: #333;
+        font: 14px "Segoe UI", "Arial", sans-serif;
+        border-radius: 4px 0 4px 0;
+        width: 300px;
+      }
+      #url-input-submit {
+        background: #00BFFF;
+        border: none;
+        color: #FFF;
+        font: 16px "Segoe UI", "Arial", sans-serif;
+        border-radius: 0 4px 0 4px;
+      }
+      #url-input-submit:hover {
+        background: #0080EE;
+      }
+      #url-input-submit:active {
+        background: #0060CC;
+      }
+      #log {
+        min-width: 200px;
+        min-height: 100px;
+        resize: both;
+      }
+      select, option {
+        font-size: 20px;
+      }
+    </style>
   </head>
   <body>
     <h1>Gopal's Video Downloader</h1>
     <p>A simple video downloader.</p>
     <div>
-      <input type="text" id="url-input" placeholder="Video URL or Video ID">
+      <input type="text" id="url-input" placeholder="Video URL or YouTube&trade; Video ID" spellcheck="false">
       <button id="url-input-submit" onclick="processInput(document.getElementById('url-input').value);">Get Video</button>
     </div>
+    <div id="file-format-options">
+      <h2>Choose file format</h2>
+      <select id="select-file-format">
+        <option value="mp4" selected>MP4 (MPEG-4)</option>
+        <option value="flv" selected>FLV (Flash Video)</option>
+      </select>
+    </div>
     <div id="video-options">
-      <h2>Choose video format</h2>
-      <select>
+      <h2>Choose video resolution</h2>
+      <select id="select-video-res">
         <option selected>Best available</option>
       </select>
     </div>
     <div id="audio-only-options" style="display: none;">
       <h2>Choose audio format</h2>
-      <select>
+      <select id="select-audio-format">
         <option selected>Best available</option>
       </select>
     </div>
+    <div id="log"></div>
+    <div>Final download links</div>
   </body>
+  <script>
+    function processInput(urlInput) {
+      let chosenFileFormat = document.getElementById("select-file-format").options[document.getElementById("select-file-format").selectedIndex].value;
+      if (!urlInput.includes("/")) {
+        urlInput = `https://youtube.com/watch?v=${urlInput}`;
+      }
+      else {
+        location.href = `./downloader?video_url=${urlInput}&file_format=${chosenFileFormat}`;
+      }
+    }
+  </script>
 </html>

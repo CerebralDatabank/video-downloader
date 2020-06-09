@@ -1,6 +1,7 @@
 const express = require("express");
 const cors = require("cors");
 const ytdl = require("ytdl-core");
+const fs = require("fs");
 
 const app = express();
 app.disable("x-powered-by");
@@ -11,7 +12,15 @@ app.get("/", (request, response) => {
 });
 
 app.get("/downloader", (request, response) => {
-  response.send(request.params);
+  if (!request.query["video_url"] || !request.query["file_format"]) {
+    request.status(400).send("400 Bad Request");
+  }
+  else {
+    let url = request.query["video_url"];
+    let fileformat = request.query["file_format"];
+    response.header("Content-Disposition", `attachment; filename="downloaded-video.${fileformat}"`);
+    ytdl(url, {format: fileformat}).pipe(res);
+  }
 });
 
 app.listen(process.env.PORT || 4000, () => {
