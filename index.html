@@ -70,9 +70,17 @@
     <div id="video-options">
       <h2>Choose video resolution</h2>
       <select id="select-video-res">
-        <option selected>Highest quality</option>
+        <option value="highest" selected>Highest quality</option>
+        <option value="1080p" disabled>3840&times;2160 (4320p / 8K Ultra HD)</option>
+        <option value="1080p" disabled>3840&times;2160 (2160p / 4K Ultra HD)</option>
+        <option value="1080p" disabled>2560&times;1440 (1440p / Quad HD)</option>
         <option value="1080p" disabled>1920&times;1080 (1080p / Full HD)</option>
         <option value="720p" disabled>1280&times;720 (720p / HD)</option>
+        <option value="480p" disabled>640&times;480 (480p)</option>
+        <option value="360p" disabled>640&times;360 (Wide 360p)</option>
+        <option value="240p" disabled>320&times;240 (240p)</option>
+        <option value="144p" disabled>256&times;144 (144p)</option>
+        <option value="lowest" >Lowest quality</option>
       </select>
     </div>
     <div id="audio-only-options" style="display: none;">
