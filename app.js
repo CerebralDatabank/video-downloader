@@ -19,6 +19,10 @@ app.get("/manifest.webmanifest", (request, response) => {
   response.sendFile("./manifest.webmanifest", {root: __dirname});
 });
 
+app.get("/cdb-logo.png", (request, response) => {
+  response.sendFile("./cdb-logo.png", {root: __dirname});
+});
+
 app.get("/downloader", (request, response) => {
   if (!request.query["video_url"] || !request.query["file_format"] || !request.query["resolution"]) {
     response.status(400).sendFile("./http-400.html", {root: __dirname});
