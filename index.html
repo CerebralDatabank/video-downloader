@@ -63,13 +63,16 @@
       <h2>Choose file format</h2>
       <select id="select-file-format">
         <option value="mp4" selected>MP4 (MPEG-4)</option>
+        <option value="webm">WEBM (WebM)</option>
         <option value="flv">FLV (Flash Video)</option>
       </select>
     </div>
     <div id="video-options">
       <h2>Choose video resolution</h2>
       <select id="select-video-res">
-        <option selected>Best available</option>
+        <option selected>Highest quality</option>
+        <option value="1080p" disabled>1920&times;1080 (1080p / Full HD)</option>
+        <option value="720p" disabled>1280&times;1080 (720p / HD)</option>
       </select>
     </div>
     <div id="audio-only-options" style="display: none;">
