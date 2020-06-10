@@ -16,14 +16,20 @@ app.get("/gogo.css", (request, response) => {
 });
 
 app.get("/downloader", (request, response) => {
-  if (!request.query["video_url"] || !request.query["file_format"]) {
+  if (!request.query["video_url"] || !request.query["file_format"] || !request.query["resolution"]) {
     response.status(400).sendFile("./http-400.html", {root: __dirname});
   }
   else {
     let url = request.query["video_url"];
     let fileformat = request.query["file_format"];
+    let resolution = request.query["resolution"];
     response.header("Content-Disposition", `attachment; filename="downloaded-video.${fileformat}"`);
-    ytdl(url, {filter: format => (format.container == fileformat)}).pipe(response);
+    if (resolution == "any") {
+      ytdl(url, {quality: "highest", filter: format => (format.container == fileformat)}).pipe(response);
+    }
+    else {
+      ytdl(url, {quality: "highest", filter: format => (format.container == fileformat && format.quality)}).pipe(response);
+    }
   }
 });
 
