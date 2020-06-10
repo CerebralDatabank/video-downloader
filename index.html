@@ -70,17 +70,16 @@
     <div id="video-options">
       <h2>Choose video resolution</h2>
       <select id="select-video-res">
-        <option value="highest" selected>Highest quality</option>
-        <option value="1080p" disabled>3840&times;2160 (4320p / 8K Ultra HD)</option>
-        <option value="1080p" disabled>3840&times;2160 (2160p / 4K Ultra HD)</option>
-        <option value="1080p" disabled>2560&times;1440 (1440p / Quad HD)</option>
-        <option value="1080p" disabled>1920&times;1080 (1080p / Full HD)</option>
-        <option value="720p" disabled>1280&times;720 (720p / HD)</option>
-        <option value="480p" disabled>640&times;480 (480p)</option>
-        <option value="360p" disabled>640&times;360 (Wide 360p)</option>
-        <option value="240p" disabled>320&times;240 (240p)</option>
-        <option value="144p" disabled>256&times;144 (144p)</option>
-        <option value="lowest" >Lowest quality</option>
+        <option value="any" selected>Any resolution</option>
+        <option value="4320p">3840&times;2160 (4320p / 8K Ultra HD)</option>
+        <option value="2160p">3840&times;2160 (2160p / 4K Ultra HD)</option>
+        <option value="1080p">2560&times;1440 (1440p / Quad HD)</option>
+        <option value="1080p">1920&times;1080 (1080p / Full HD)</option>
+        <option value="720p">1280&times;720 (720p / HD)</option>
+        <option value="480p">640&times;480 (480p)</option>
+        <option value="360p">640&times;360 (Wide 360p)</option>
+        <option value="240p">320&times;240 (240p)</option>
+        <option value="144p">256&times;144 (144p)</option>
       </select>
     </div>
     <div id="audio-only-options" style="display: none;">
@@ -119,6 +118,7 @@
       disableAllInputs();
       log(`Processing input: ${urlInput}`);
       let chosenFileFormat = document.getElementById("select-file-format").options[document.getElementById("select-file-format").selectedIndex].value;
+      let chosenResolution = document.getElementById("select-video-res").options[document.getElementById("select-video-res").selectedIndex].value;
       if (!urlInput.includes("/")) {
         log("Input does not seem to be URL, prepending \"https://youtube.com/watch?v=\"");
         urlInput = `https://youtube.com/watch?v=${urlInput}`;
@@ -127,7 +127,7 @@
       log(`Final URL is: ${urlInput}`);
       log(`Final file format is: ${chosenFileFormat}`);
       log("Redirecting to download URL...");
-      location.href = `./downloader?video_url=${urlInput}&file_format=${chosenFileFormat}`;
+      location.href = `./downloader?video_url=${urlInput}&file_format=${chosenFileFormat}&resolution=${chosenResolution}`;
       enableAllInputs();
     }
   </script>
