@@ -1,0 +1,16 @@
+{
+  "name": "Gopal's Video Downloader",
+  "short_name": "\u2913 Video",
+  "icons": [
+    {
+      "src": "/cdb-logo.png",
+      "type": "image/png",
+      "sizes": "256x256"
+    }
+  ],
+  "display": "standalone",
+  "background_color": "#00AA00",
+  "theme_color": "#00AA00",
+  "orientation": "any",
+  "start_url": "/"
+}
