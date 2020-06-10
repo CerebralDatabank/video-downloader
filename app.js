@@ -28,7 +28,7 @@ app.get("/downloader", (request, response) => {
       ytdl(url, {quality: "highest", filter: format => (format.container == fileformat)}).pipe(response);
     }
     else {
-      ytdl(url, {quality: "highest", filter: format => (format.container == fileformat && format.quality)}).pipe(response);
+      ytdl(url, {quality: "highest", filter: format => (format.container == fileformat && format.qualityLabel == resolution)}).pipe(response);
     }
   }
 });
