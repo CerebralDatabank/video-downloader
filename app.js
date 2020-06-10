@@ -19,6 +19,11 @@ app.get("/downloader", (request, response) => {
   if (!request.query["video_url"] || !request.query["file_format"]) {
     response.status(400).sendFile("./http-400.html", {root: __dirname});
   }
+  else if (request.query["getinfo"]) {
+    ytdl.getInfo(request.query["video_url"], (err, info) => {
+      response.json(info);
+    })
+  }
   else {
     let url = request.query["video_url"];
     let fileformat = request.query["file_format"];
