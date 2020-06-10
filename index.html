@@ -98,6 +98,12 @@
     <p><small>Powered by <a href="https://www.npmjs.com/package/ytdl-core" target="_blank">ytdl-core</a>. This project is <a href="https://github.com/CerebralDatabank/gopal-video-downloader" target="_blank">open source</a>.</small></p>
   </body>
   <script>
+    if ("serviceWorker" in navigator) {
+      navigator.serviceWorker.register("./sw.js").then(() => {
+        console.log("[Service Worker] Registered");
+      });
+    }
+    else {}
     function timestamp() {
       let thedate = new Date();
       let day = String(thedate.getDate());

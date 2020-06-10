@@ -11,6 +11,10 @@ app.get("/", (request, response) => {
   response.sendFile("./index.html", {root: __dirname});
 });
 
+app.get("/index.html", (request, response) => {
+  response.sendFile("./index.html", {root: __dirname});
+});
+
 app.get("/gogo.css", (request, response) => {
   response.sendFile("./gogo.css", {root: __dirname});
 });
@@ -21,6 +25,10 @@ app.get("/manifest.webmanifest", (request, response) => {
 
 app.get("/cdb-logo.png", (request, response) => {
   response.sendFile("./cdb-logo.png", {root: __dirname});
+});
+
+app.get("/sw.js", (request, response) => {
+  response.sendFile("./sw.js", {root: __dirname});
 });
 
 app.get("/downloader", (request, response) => {
