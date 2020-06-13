@@ -87,12 +87,6 @@
         <option value="144p">256&times;144 (144p)</option>
       </select>
     </div>
-    <div id="audio-only-options" style="display: none;">
-      <h2>Choose audio format</h2>
-      <select id="select-audio-format">
-        <option selected>Best available</option>
-      </select>
-    </div>
     <h2>Log</h2>
     <div id="log"></div>
     <p><small>Powered by <a href="https://www.npmjs.com/package/ytdl-core" target="_blank">ytdl-core</a>. This project is <a href="https://github.com/CerebralDatabank/gopal-video-downloader" target="_blank">open source</a>.</small></p>
@@ -116,12 +110,12 @@
       document.getElementById("log").insertAdjacentHTML("beforeend", `<div>[${timestamp()}] ${logMessage}</div>`);
     }
     function disableAllInputs() {
-      ["url-input", "url-input-submit", "select-file-format", "select-video-res", "select-audio-format"].forEach(elemId => {
+      ["url-input", "url-input-submit", "select-file-format", "select-video-res"].forEach(elemId => {
         document.getElementById(elemId).disabled = true;
       });
     }
     function enableAllInputs() {
-      ["url-input", "url-input-submit", "select-file-format", "select-video-res", "select-audio-format"].forEach(elemId => {
+      ["url-input", "url-input-submit", "select-file-format", "select-video-res"].forEach(elemId => {
         document.getElementById(elemId).disabled = false;
       });
     }
