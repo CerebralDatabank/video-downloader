@@ -131,6 +131,7 @@
       else {}
       log(`Final URL is: ${urlInput}`);
       log(`Final file format is: ${chosenFileFormat}`);
+      log(`Final resolution is: ${chosenResolution}`);
       log("Redirecting to download URL...");
       location.href = `./downloader?video_url=${urlInput}&file_format=${chosenFileFormat}&resolution=${chosenResolution}`;
       enableAllInputs();
