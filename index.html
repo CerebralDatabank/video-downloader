@@ -64,6 +64,7 @@
       <button id="url-input-submit" onclick="processInput(document.getElementById('url-input').value);">Download Video</button>
     </div>
     <p><small>Or, <span style="color: #00F; cursor: pointer;" onclick="if (document.getElementById('url-input').disabled == true) {} else {document.getElementById('url-input').value = 'https:\/\/www.youtube.com\/watch?v=C0DPdy98e4c';}">load a test YouTube URL &#x2B0F;</span></small></p>
+    <p id="error" style="color: #F00; font-weight: bold; display: none;">Unknown error, try checking log</p>
     <div id="file-format-options">
       <h2>Choose file format</h2>
       <select id="select-file-format">
@@ -109,6 +110,14 @@
     function log(logMessage) {
       document.getElementById("log").insertAdjacentHTML("beforeend", `<div>[${timestamp()}] ${logMessage}</div>`);
     }
+    function showError(errMessage = "Unknown error, try checking log") {
+      document.getElementById("error").innerHTML = errMessage;
+      document.getElementById("error").style.display = "block";
+    }
+    function hideError() {
+      document.getElementById("error").innerHTML = "Unknown error, try checking log";
+      document.getElementById("error").style.display = "none";
+    }
     function disableAllInputs() {
       ["url-input", "url-input-submit", "select-file-format", "select-video-res"].forEach(elemId => {
         document.getElementById(elemId).disabled = true;
@@ -121,6 +130,7 @@
     }
     function processInput(urlInput) {
       disableAllInputs();
+      hideError();
       log(`Processing input: ${urlInput}`);
       let chosenFileFormat = document.getElementById("select-file-format").options[document.getElementById("select-file-format").selectedIndex].value;
       let chosenResolution = document.getElementById("select-video-res").options[document.getElementById("select-video-res").selectedIndex].value;
@@ -132,9 +142,19 @@
       log(`Final URL is: ${urlInput}`);
       log(`Final file format is: ${chosenFileFormat}`);
       log(`Final resolution is: ${chosenResolution}`);
-      log("Redirecting to download URL...");
-      location.href = `./downloader?video_url=${urlInput}&file_format=${chosenFileFormat}&resolution=${chosenResolution}`;
-      enableAllInputs();
+      log("Checking if specified configuration exists...");
+      fetch(`/getinfo?video_url=${urlInput}`).then(response => response.json()).then(jsonObj => {
+        let availableFormats = jsonObj.formats.filter(format => (format.container == fileformat && format.qualityLabel.startsWith(resolution)));
+        if (availableFormats.length == 0) {
+          log("ERROR: Could not find video with specified format.");
+          showError("ERROR: Could not find video with specified format. Change options below and try again");
+        }
+        else {
+          log("Redirecting to download URL...");
+          location.href = `./downloader?video_url=${urlInput}&file_format=${chosenFileFormat}&resolution=${chosenResolution}`;
+        }
+        enableAllInputs();
+      });
     }
   </script>
 </html>
