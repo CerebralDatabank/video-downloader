@@ -131,6 +131,12 @@
     function processInput(urlInput) {
       disableAllInputs();
       hideError();
+      if (!urlInput) {
+        showError("ERROR: You must enter a valid URL");
+        enableAllInputs();
+        return;
+      }
+      else {}
       log(`Processing input: ${urlInput}`);
       let chosenFileFormat = document.getElementById("select-file-format").options[document.getElementById("select-file-format").selectedIndex].value;
       let chosenResolution = document.getElementById("select-video-res").options[document.getElementById("select-video-res").selectedIndex].value;
