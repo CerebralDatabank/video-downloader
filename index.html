@@ -154,6 +154,8 @@
           location.href = `./downloader?video_url=${urlInput}&file_format=${chosenFileFormat}&resolution=${chosenResolution}`;
         }
         enableAllInputs();
+      }).catch(err => {
+        console.error("Error during checking process", err);
       });
     }
   </script>
