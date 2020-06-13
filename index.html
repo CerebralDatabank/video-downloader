@@ -143,8 +143,8 @@
       log(`Final file format is: ${chosenFileFormat}`);
       log(`Final resolution is: ${chosenResolution}`);
       log("Checking if specified configuration exists...");
-      fetch(`/getinfo?video_url=${urlInput}`).then(response => response.json()).then(jsonObj => {
-        let availableFormats = jsonObj.formats.filter(format => (format.container == chosenFileFormat && format.qualityLabel.startsWith(chosenResolution)));
+      fetch(`/getinfo?video_url=${urlInput}`).then(response => response.json()).then(jsonObj => {console.info(jsonObj);
+        let availableFormats = jsonObj.formats.filter(format => (format.container == chosenFileFormat && format.qualityLabel && format.qualityLabel.startsWith(chosenResolution)));
         if (availableFormats.length == 0) {
           log("ERROR: Could not find video with specified format.");
           showError("ERROR: Could not find video with specified format. Change options below and try again");

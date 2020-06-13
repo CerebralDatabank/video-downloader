@@ -44,7 +44,7 @@ app.get("/downloader", (request, response) => {
       ytdl(url, {quality: "highest", filter: format => (format.container == fileformat)}).pipe(response);
     }
     else {
-      ytdl(url, {quality: "highest", filter: format => (format.container == fileformat && format.qualityLabel.startsWith(resolution))}).pipe(response);
+      ytdl(url, {quality: "highest", filter: format => (format.container == fileformat && format.qualityLabel && format.qualityLabel.startsWith(resolution))}).pipe(response);
     }
   }
 });
