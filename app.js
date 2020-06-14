@@ -56,7 +56,8 @@ app.get("/getinfo", (request, response) => {
   else {
     ytdl.getInfo(request.query["video_url"], (err, info) => {
       if (err) {
-        console.error(err);
+        console.error("getinfo error", err);
+        response.send("Error");
       }
       else {
         response.json(info);
