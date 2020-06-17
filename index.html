@@ -64,6 +64,7 @@
     </div>
     <p><small>Or, <span style="color: #00F; cursor: pointer;" onclick="if (document.getElementById('url-input').disabled == true) {} else {document.getElementById('url-input').value = 'https:\/\/www.youtube.com\/watch?v=QAUzWtLMnU0';}">load a test YouTube URL (with max quality of 1080p) &#x2B0F;</span></small></p>
     <p id="error" style="color: #F00; font-weight: bold; display: none;">Unknown error, try checking log</p>
+    <p id="offline-error" style="color: #F00; font-weight: bold; display: none;">WARNING: You appear to be offline. Check your Internet connection.</p>
     <div id="file-format-options">
       <h2>Choose file format</h2>
       <select id="select-file-format">
@@ -163,5 +164,11 @@
         console.error("Error during checking process", err);
       });
     }
+    window.addEventListener("offline", event => {
+      document.getElementById("offline-error").style.display = "block";
+    });
+    window.addEventListener("online", event => {
+      document.getElementById("offline-error").style.display = "none";
+    });
   </script>
 </html>
