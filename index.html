@@ -159,7 +159,7 @@
       log(`Final file format is: ${chosenFileFormat}`);
       log(`Final resolution is: ${chosenResolution}`);
       log("Checking if specified configuration exists...");
-      fetch(`/getinfo?video_url=${urlInput}`).then(response => response.json()).then(jsonObj => {console.info(jsonObj);
+      fetch(`/getinfo?video_url=${urlInput}`).then(response => response.json()).then(jsonObj => {
         if (urlInput.includes("youtube")) {
           document.getElementById("yt-video-info").style.display = "block";
           document.getElementById("yt-video-info-title").textContent = jsonObj.title;
