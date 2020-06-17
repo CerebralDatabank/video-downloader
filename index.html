@@ -120,11 +120,11 @@
       document.getElementById("log").insertAdjacentHTML("beforeend", `<div>[${timestamp()}] ${logMessage}</div>`);
     }
     function showError(errMessage = "Unknown error, try checking log") {
-      document.getElementById("error").innerHTML = errMessage;
+      document.getElementById("error").textContent = errMessage;
       document.getElementById("error").style.display = "block";
     }
     function hideError() {
-      document.getElementById("error").innerHTML = "Unknown error, try checking log";
+      document.getElementById("error").textContent = "Unknown error, try checking log";
       document.getElementById("error").style.display = "none";
     }
     function disableAllInputs() {
