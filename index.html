@@ -175,11 +175,12 @@
         else {
           document.getElementById("yt-video-info").style.display = "none";
         }
+        let availableFormats = [];
         if (chosenResolution == "any") {
-          let availableFormats = jsonObj.formats.filter(format => (format.container == chosenFileFormat));
+          availableFormats = jsonObj.formats.filter(format => (format.container == chosenFileFormat));
         }
         else {
-          let availableFormats = jsonObj.formats.filter(format => (format.container == chosenFileFormat && format.qualityLabel && format.qualityLabel.startsWith(chosenResolution)));
+          availableFormats = jsonObj.formats.filter(format => (format.container == chosenFileFormat && format.qualityLabel && format.qualityLabel.startsWith(chosenResolution)));
         }
         if (availableFormats.length == 0) {
           log("ERROR: Could not find video with specified format.");
