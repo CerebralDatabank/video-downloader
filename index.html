@@ -59,7 +59,7 @@
     <h1>Gopal's Video Downloader</h1>
     <p>A simple video downloader. Only YouTube&trade; videos are supported.</p>
     <div style="display: flex;">
-      <input type="text" id="url-input" placeholder="Video URL or YouTube&trade; Video ID" spellcheck="false">
+      <input type="text" id="url-input" placeholder="Video URL or YouTube&trade; Video ID" spellcheck="false" autofocus>
       <button id="url-input-submit" onclick="processInput(document.getElementById('url-input').value);">Download Video</button>
     </div>
     <p><small>Or, <span style="color: #00F; cursor: pointer;" onclick="if (document.getElementById('url-input').disabled == true) {} else {document.getElementById('url-input').value = 'https:\/\/www.youtube.com\/watch?v=QAUzWtLMnU0';}">load a test YouTube URL (with max quality of 1080p) &#x2B0F;</span></small></p>
