@@ -71,6 +71,7 @@
       <div>Author:&nbsp;<span id="yt-video-info-author-name">Video Author Name</span>&nbsp;(user: <span id="yt-video-info-author-user">Video User Name</span>)</div>
       <div>Description:&nbsp;<span id="yt-video-info-desc">Video Description</span></div>
       <div>Length:&nbsp;<span id="yt-video-info-length">Video Length</span></div>
+      <div>Publication Time:&nbsp;<span id="yt-video-info-pubtime">Video Publication Time</span></div>
       <div id="yt-video-info-agerestricted">Not age-restricted</div>
       <div>Video ID:&nbsp;<span id="yt-video-info-id">Video ID</span></div>
     </fieldset>
@@ -167,6 +168,7 @@
           document.getElementById("yt-video-info-author-user").textContent = jsonObj.author.user;
           document.getElementById("yt-video-info-desc").textContent = jsonObj.description;
           document.getElementById("yt-video-info-length").textContent = `${jsonObj.length_seconds} seconds`;
+          document.getElementById("yt-video-info-pubtime").textContent = (new Date(jsonObj.published)).toString();
           document.getElementById("yt-video-info-agerestricted").textContent = jsonObj.age_restricted ? "\u26A0 Age-restricted" : "Not age-restricted";
           document.getElementById("yt-video-info-id").textContent = jsonObj.video_id;
         }
