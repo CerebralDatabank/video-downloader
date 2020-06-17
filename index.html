@@ -65,6 +65,15 @@
     <p><small>Or, <span style="color: #00F; cursor: pointer;" onclick="if (document.getElementById('url-input').disabled == true) {} else {document.getElementById('url-input').value = 'https:\/\/www.youtube.com\/watch?v=QAUzWtLMnU0';}">load a test YouTube URL (with max quality of 1080p) &#x2B0F;</span></small></p>
     <p id="error" style="color: #F00; font-weight: bold; display: none;">Unknown error, try checking log</p>
     <p id="offline-error" style="color: #F00; font-weight: bold; display: none;">WARNING: You appear to be offline. Check your Internet connection.</p>
+    <fieldset id="yt-video-info" style="border: 2px solid #000; max-width: 600px; display: none;">
+      <legend style="font-size: 20px;">YouTube&trade; Video Information</legend>
+      <div id="yt-video-info-title" style="font-size: 30px;">Video Title</div>
+      <div>Author:&nbsp;<span id="yt-video-info-author-name">Video Author Name</span>&nbsp;(user: <span id="yt-video-info-author-user">Video User Name</span>)</div>
+      <div>Description:&nbsp;<span id="yt-video-info-desc">Video Description</span></div>
+      <div>Length:&nbsp;<span id="yt-video-info-length">Video Length</span></div>
+      <div id="yt-video-info-agerestricted">Not age-restricted</div>
+      <div>Video ID:&nbsp;<span id="yt-video-info-id">Video ID</span></div>
+    </fieldset>
     <div id="file-format-options">
       <h2>Choose file format</h2>
       <select id="select-file-format">
@@ -150,6 +159,20 @@
       log(`Final resolution is: ${chosenResolution}`);
       log("Checking if specified configuration exists...");
       fetch(`/getinfo?video_url=${urlInput}`).then(response => response.json()).then(jsonObj => {console.info(jsonObj);
+        if (urlInput.includes("youtube")) {
+          document.getElementById("yt-video-info").style.display = "block";
+          document.getElementById("yt-video-info-title").textContent = jsonObj.title;
+          document.getElementById("yt-video-info-title").textContent = jsonObj.title;
+          document.getElementById("yt-video-info-author-name").textContent = jsonObj.author.name;
+          document.getElementById("yt-video-info-author-user").textContent = jsonObj.author.user;
+          document.getElementById("yt-video-info-desc").textContent = jsonObj.description;
+          document.getElementById("yt-video-info-length").textContent = `${jsonObj.length_seconds} seconds`;
+          document.getElementById("yt-video-info-agerestricted").textContent = jsonObj.age_restricted ? "\u26A0 Age-restricted" : "Not age-restricted";
+          document.getElementById("yt-video-info-id").textContent = jsonObj.video_id;
+        }
+        else {
+          document.getElementById("yt-video-info").style.display = "none";
+        }
         let availableFormats = jsonObj.formats.filter(format => (format.container == chosenFileFormat && format.qualityLabel && format.qualityLabel.startsWith(chosenResolution)));
         if (availableFormats.length == 0) {
           log("ERROR: Could not find video with specified format.");
