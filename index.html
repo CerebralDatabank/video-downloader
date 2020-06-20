@@ -158,7 +158,7 @@
       log(`Final URL is: ${urlInput}`);
       log(`Final file format is: ${chosenFileFormat}`);
       log(`Final resolution is: ${chosenResolution}`);
-      log("Checking if specified configuration exists...");
+      log("Checking if specified configuration exists and updating video info area...");
       fetch(`/getinfo?video_url=${urlInput}`).then(response => response.json()).then(jsonObj => {
         if (urlInput.includes("youtube")) {
           document.getElementById("yt-video-info").style.display = "block";
