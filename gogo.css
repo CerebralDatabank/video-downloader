@@ -1,9 +1,9 @@
 /* GOGO CSS by Gopal Othayoth (cerebraldatabank@gmail.com, https://cerebraldatabank.neocities.org/)
- * Version: v2.2.0
+ * Version: v3.0.0
  * Last Updated: 2019-08-22
  * This file itself may not be distributed without express written/typed permission by Gopal Othayoth (cerebraldatabank@gmail.com). If you wish to share the code, please share this URL: https://cerebraldatabank.neocities.org/utilities/gogo_css.html
  * The GOGO CSS Class Library was made by Gopal Othayoth (cerebraldatabank@gmail.com). All rights reserved.
- * All Data URI images are also created by Gopal Othayoth and can be treated as part of the GOGO CSS Class Library
+ * All Data URI images are also created by Gopal Othayoth and can be treated as part of the GOGO CSS Class Library.
  */
 
 /*Comment out below rule to not disable dotted borders*/
@@ -285,4 +285,37 @@ select:disabled {
   -o-user-select: none;
   -khtml-user-select: none;
   user-select: none;
+}
+
+.gogo-dialog {
+  z-index: 1000;
+  width: 400px;
+  height: 200px;
+  background: #FFFFFF;
+  border: none;
+  border-radius: 4px;
+  box-shadow: 0 2px 10px 0 #AAAAAA;
+  position: relative;
+  padding: 10px;
+  overflow: hidden;
+}
+.gogo-dialog::backdrop {
+  background: #80808080;
+}
+.gogo-dialog-content {
+  width: 100%;
+  height: 150px;
+  overflow: auto;
+  scrollbar-width: thin;
+}
+.gogo-dialog-buttons {
+  position: absolute;
+  bottom: 10px;
+  right: 10px;
+  width: calc(100% - 20px);
+  border-top: 1px solid #AAA;
+  padding-top: 10px;
+}
+.gogo-dialog-buttons > * {
+  float: right;
 }
