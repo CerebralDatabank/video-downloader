@@ -164,13 +164,23 @@
       <div>
         <textarea id="yt-bulk-input"></textarea>
       </div>
-      <button id="yt-bulk-dld-button" class="gogo-btn gogo-btn-green gogo-btn-bigaction" onclick="processBulkInput(document.getElementById('yt-bulk-input').value)">Download Videos</button>
+      <button id="yt-bulk-dld-button" class="gogo-btn gogo-btn-green gogo-btn-bigaction" onclick="document.getElementById('bulk-dld-dialog').showModal();">Download Videos</button>
     </div>
     <div id="extras">
       <h2>Log</h2>
       <div id="log"></div>
       <p><small>Powered by <a href="https://www.npmjs.com/package/ytdl-core" target="_blank">ytdl-core</a>. This project is <a href="https://github.com/CerebralDatabank/gopal-video-downloader" target="_blank">open source</a>.</small></p>
     </div>
+    <dialog class="gogo-dialog" id="bulk-dld-dialog">
+      <div class="gogo-dialog-content">
+        <div style="text-align: center; font-weight: bold;">Notice</div>
+        <div>You're about to initiate a bulk download. You may see a prompt from your browser to allow "multiple downloads" or "automatic downloads"; if so, please grant that permission so all of the videos can be downloaded.</div>
+      </div>
+      <div class="gogo-dialog-buttons">
+        <button class="gogo-btn" onclick="this.parentElement.parentElement.close(); processBulkInput(document.getElementById('yt-bulk-input').value);">Cancel downloads</button>
+        <button class="gogo-btn gogo-btn-blue" onclick="this.parentElement.parentElement.close(); processBulkInput(document.getElementById('yt-bulk-input').value);">Got it, start downloading</button>
+      </div>
+    </dialog>
     <script>
       if ("serviceWorker" in navigator) {
         navigator.serviceWorker.register("./sw.js").then(() => {
