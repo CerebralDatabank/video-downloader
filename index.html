@@ -44,6 +44,13 @@
         background: #0C0;
         opacity: 0.6;
       }
+      #bulk-yt-input {
+        padding: 10px;
+        font: 16px "Consolas", monospace;
+        width: 320px;
+        min-height: 200px;
+        resize: vertical;
+      }
       #log {
         min-width: 200px;
         min-height: 100px;
@@ -153,7 +160,8 @@
     </div>
     <div class="page" id="page-yt-bulk" style="display: none;">
       <h1>Bulk YouTube&trade; Downloader</h1>
-      <p>Coming Soon</p>
+      <p>Enter YouTube&trade; video URLs or video IDs separated by a newline. The highest quality format will be downloaded for each video.</p>
+      <textarea id="bulk-yt-input"></textarea>
     </div>
     <div id="extras">
       <h2>Log</h2>
