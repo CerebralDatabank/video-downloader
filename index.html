@@ -44,7 +44,7 @@
         background: #0C0;
         opacity: 0.6;
       }
-      #bulk-yt-input {
+      #yt-bulk-input {
         padding: 10px;
         font: 16px "Consolas", monospace;
         width: 320px;
@@ -162,9 +162,9 @@
       <h1>Bulk YouTube&trade; Downloader</h1>
       <p>Enter YouTube&trade; video URLs or video IDs separated by a newline. The highest quality format will be downloaded for each video.</p>
       <div>
-        <textarea id="bulk-yt-input"></textarea>
+        <textarea id="yt-bulk-input"></textarea>
       </div>
-      <button id="yt-bulk-dld-button" class="gogo-btn gogo-green-btn gogo-btn-bigaction">Download Videos</button>
+      <button id="yt-bulk-dld-button" class="gogo-btn gogo-btn-green gogo-btn-bigaction" onclick="processBulkInput(document.getElementById('yt-bulk-input').value)">Download Videos</button>
     </div>
     <div id="extras">
       <h2>Log</h2>
@@ -213,12 +213,12 @@
         document.getElementById("error").style.display = "none";
       }
       function disableAllInputs() {
-        ["url-input", "url-input-submit", "select-file-format", "select-video-res"].forEach(elemId => {
+        ["url-input", "url-input-submit", "select-file-format", "select-video-res", "yt-bulk-input", "yt-bulk-dld-button"].forEach(elemId => {
           document.getElementById(elemId).disabled = true;
         });
       }
       function enableAllInputs() {
-        ["url-input", "url-input-submit", "select-file-format", "select-video-res"].forEach(elemId => {
+        ["url-input", "url-input-submit", "select-file-format", "select-video-res", "yt-bulk-input", "yt-bulk-dld-button"].forEach(elemId => {
           document.getElementById(elemId).disabled = false;
         });
       }
@@ -230,6 +230,7 @@
         });
         document.getElementById(`page-${pageId}`).style.display = "block";
         document.getElementById(`tab-${pageId}`).classList.add("tab-selected");
+        log(`Switched to page "${pageId}"`);
       }
       [...document.getElementById("tabs").children].forEach(elem => elem.addEventListener("click", function() {
         switchPage(this.id.replace(/tab-/, ""));
@@ -290,6 +291,15 @@
         }).catch(err => {
           console.error("Error during checking process", err);
         });
+      }
+      function processBulkInput(bulkInput) {
+        disableAllInputs();
+        let ytUrls = bulkInput.split("\n");
+        for (const ytUrl of ytUrls) {
+          log(`Redirecting to download URL for ${ytUrl}...`);
+          location.href = `./downloader?video_url=${ytUrl}&bulk=1`;
+        }
+        enableAllInputs();
       }
       window.addEventListener("offline", event => {
         document.getElementById("offline-error").style.display = "block";

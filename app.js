@@ -32,7 +32,11 @@ app.get("/sw.js", (request, response) => {
 });
 
 app.get("/downloader", (request, response) => {
-  if (!request.query["video_url"] || !request.query["file_format"] || !request.query["resolution"]) {
+  if (request.query["bulk"] && request.query["bulk"] == "1") {
+    response.header("Content-Disposition", `attachment; filename="downloaded-video.mp4"`);
+    ytdl(request.query["video_url"], {quality: "highest", filter: format => format.container == "mp4"}).pipe(response);
+  }
+  else if (!request.query["video_url"] || !request.query["file_format"] || !request.query["resolution"]) {
     response.status(400).sendFile("./http-400.html", {root: __dirname});
   }
   else {
