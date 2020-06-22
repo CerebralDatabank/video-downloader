@@ -106,7 +106,7 @@
       }
     </style>
   </head>
-  <body onload="if (getURLParam('goto_tab')) {switchPage(getURLParam('goto_tab'));}">
+  <body onload="if (getURLParam('no-force-https') != '1' && location.protocol !== 'https:') {location.replace(`https:${location.href.substring(location.protocol.length)}`);} if (getURLParam('goto_tab')) {switchPage(getURLParam('goto_tab'));}">
     <header>
       <h1>Gopal's Video Downloader</h1>
       <p>A simple video downloader. Only YouTube&trade; videos are supported.</p>
