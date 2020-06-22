@@ -106,7 +106,7 @@
       }
     </style>
   </head>
-  <body>
+  <body onload="if (getURLParam('goto_tab')) {switchPage(getURLParam('goto_tab'));}">
     <header>
       <h1>Gopal's Video Downloader</h1>
       <p>A simple video downloader. Only YouTube&trade; videos are supported.</p>
@@ -178,6 +178,21 @@
         });
       }
       else {}
+      function getURLParam(name, decode = false) {
+        let query = window.location.search.substring(1);
+        if (decode) {
+          query = String(decodeURIComponent(query)).replace(/\+/g, " ");
+        }
+        else {}
+        let vars = query.split("&");
+        for (let i = 0; i < vars.length; i++) {
+          let pair = vars[i].split("=");
+          if (pair[0] == name) {
+            return pair[1];
+          }
+          else {}
+        }
+      }
       function timestamp() {
         let thedate = new Date();
         let day = String(thedate.getDate());
