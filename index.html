@@ -168,117 +168,117 @@
       <div id="log"></div>
       <p><small>Powered by <a href="https://www.npmjs.com/package/ytdl-core" target="_blank">ytdl-core</a>. This project is <a href="https://github.com/CerebralDatabank/gopal-video-downloader" target="_blank">open source</a>.</small></p>
     </div>
+    <script>
+      if ("serviceWorker" in navigator) {
+        navigator.serviceWorker.register("./sw.js").then(() => {
+          console.log("[Service Worker] Registered");
+        });
+      }
+      else {}
+      function timestamp() {
+        let thedate = new Date();
+        let day = String(thedate.getDate());
+        let month = String(thedate.getMonth() + 1);
+        let year = String(thedate.getFullYear());
+        let time = ("0" + (new Date()).getHours()).slice(-2) + ":" + ("0" + (new Date()).getMinutes()).slice(-2) + ":" + ("0" + (new Date()).getSeconds()).slice(-2);
+        return `${year.padStart(2, "0")}-${month.padStart(2, "0")}-${day.padStart(2, "0")} ${time}`;
+      }
+      function log(logMessage) {
+        document.getElementById("log").insertAdjacentHTML("beforeend", `<div>[${timestamp()}] ${logMessage}</div>`);
+      }
+      function showError(errMessage = "Unknown error, try checking log") {
+        document.getElementById("error").textContent = errMessage;
+        document.getElementById("error").style.display = "block";
+      }
+      function hideError() {
+        document.getElementById("error").textContent = "Unknown error, try checking log";
+        document.getElementById("error").style.display = "none";
+      }
+      function disableAllInputs() {
+        ["url-input", "url-input-submit", "select-file-format", "select-video-res"].forEach(elemId => {
+          document.getElementById(elemId).disabled = true;
+        });
+      }
+      function enableAllInputs() {
+        ["url-input", "url-input-submit", "select-file-format", "select-video-res"].forEach(elemId => {
+          document.getElementById(elemId).disabled = false;
+        });
+      }
+      function switchPage(pageId) {
+        /*pageId is the page or tab ID without the "page-" or "tab-" part.*/
+        ["yt", "yt-bulk"].forEach(elemId => {
+          document.getElementById(`page-${elemId}`).style.display = "none";
+          document.getElementById(`tab-${elemId}`).classList.remove("tab-selected");
+        });
+        document.getElementById(`page-${pageId}`).style.display = "block";
+        document.getElementById(`tab-${pageId}`).classList.add("tab-selected");
+      }
+      [...document.getElementById("tabs").children].forEach(elem => elem.addEventListener("click", function() {
+        switchPage(this.id.replace(/tab-/, ""));
+      }));
+      function processInput(urlInput) {
+        disableAllInputs();
+        hideError();
+        if (!urlInput) {
+          showError("ERROR: You must enter a valid URL");
+          enableAllInputs();
+          return;
+        }
+        else {}
+        log(`Processing input: ${urlInput}`);
+        let chosenFileFormat = document.getElementById("select-file-format").options[document.getElementById("select-file-format").selectedIndex].value;
+        let chosenResolution = document.getElementById("select-video-res").options[document.getElementById("select-video-res").selectedIndex].value;
+        if (!urlInput.includes("/")) {
+          log("Input does not seem to be URL, prepending \"https://youtube.com/watch?v=\"");
+          urlInput = `https://youtube.com/watch?v=${urlInput}`;
+        }
+        else {}
+        log(`Final URL is: ${urlInput}`);
+        log(`Final file format is: ${chosenFileFormat}`);
+        log(`Final resolution is: ${chosenResolution}`);
+        log("Checking if specified configuration exists and updating video info area...");
+        fetch(`/getinfo?video_url=${urlInput}`).then(response => response.json()).then(jsonObj => {
+          if (urlInput.includes("youtube")) {
+            document.getElementById("yt-video-info").style.display = "block";
+            document.getElementById("yt-video-info-title").textContent = jsonObj.title;
+            document.getElementById("yt-video-info-title").textContent = jsonObj.title;
+            document.getElementById("yt-video-info-author-name").textContent = jsonObj.author.name;
+            document.getElementById("yt-video-info-author-user").textContent = jsonObj.author.user;
+            document.getElementById("yt-video-info-desc").textContent = jsonObj.description;
+            document.getElementById("yt-video-info-length").textContent = `${jsonObj.length_seconds} seconds`;
+            document.getElementById("yt-video-info-pubtime").textContent = (new Date(jsonObj.published)).toString();
+            document.getElementById("yt-video-info-agerestricted").textContent = jsonObj.age_restricted ? "\u26A0 Age-restricted" : "Not age-restricted";
+            document.getElementById("yt-video-info-id").textContent = jsonObj.video_id;
+          }
+          else {
+            document.getElementById("yt-video-info").style.display = "none";
+          }
+          let availableFormats = [];
+          if (chosenResolution == "any") {
+            availableFormats = jsonObj.formats.filter(format => (format.container == chosenFileFormat));
+          }
+          else {
+            availableFormats = jsonObj.formats.filter(format => (format.container == chosenFileFormat && format.qualityLabel && format.qualityLabel.startsWith(chosenResolution)));
+          }
+          if (availableFormats.length == 0) {
+            log("ERROR: Could not find video with specified format.");
+            showError("ERROR: Could not find video with specified format. Change options below and try again");
+          }
+          else {
+            log("Redirecting to download URL...");
+            location.href = `./downloader?video_url=${urlInput}&file_format=${chosenFileFormat}&resolution=${chosenResolution}`;
+          }
+          enableAllInputs();
+        }).catch(err => {
+          console.error("Error during checking process", err);
+        });
+      }
+      window.addEventListener("offline", event => {
+        document.getElementById("offline-error").style.display = "block";
+      });
+      window.addEventListener("online", event => {
+        document.getElementById("offline-error").style.display = "none";
+      });
+    </script>
   </body>
-  <script>
-    if ("serviceWorker" in navigator) {
-      navigator.serviceWorker.register("./sw.js").then(() => {
-        console.log("[Service Worker] Registered");
-      });
-    }
-    else {}
-    function timestamp() {
-      let thedate = new Date();
-      let day = String(thedate.getDate());
-      let month = String(thedate.getMonth() + 1);
-      let year = String(thedate.getFullYear());
-      let time = ("0" + (new Date()).getHours()).slice(-2) + ":" + ("0" + (new Date()).getMinutes()).slice(-2) + ":" + ("0" + (new Date()).getSeconds()).slice(-2);
-      return `${year.padStart(2, "0")}-${month.padStart(2, "0")}-${day.padStart(2, "0")} ${time}`;
-    }
-    function log(logMessage) {
-      document.getElementById("log").insertAdjacentHTML("beforeend", `<div>[${timestamp()}] ${logMessage}</div>`);
-    }
-    function showError(errMessage = "Unknown error, try checking log") {
-      document.getElementById("error").textContent = errMessage;
-      document.getElementById("error").style.display = "block";
-    }
-    function hideError() {
-      document.getElementById("error").textContent = "Unknown error, try checking log";
-      document.getElementById("error").style.display = "none";
-    }
-    function disableAllInputs() {
-      ["url-input", "url-input-submit", "select-file-format", "select-video-res"].forEach(elemId => {
-        document.getElementById(elemId).disabled = true;
-      });
-    }
-    function enableAllInputs() {
-      ["url-input", "url-input-submit", "select-file-format", "select-video-res"].forEach(elemId => {
-        document.getElementById(elemId).disabled = false;
-      });
-    }
-    function switchPage(pageId) {
-      /*pageId is the page or tab ID without the "page-" or "tab-" part.*/
-      ["yt", "yt-bulk"].forEach(elemId => {
-        document.getElementById(`page-${elemId}`).style.display = "none";
-        document.getElementById(`tab-${elemId}`).classList.remove("tab-selected");
-      });
-      document.getElementById(`page-${pageId}`).style.display = "block";
-      document.getElementById(`tab-${pageId}`).classList.add("tab-selected");
-    }
-    [...document.getElementById("tabs").children].forEach(elem => elem.addEventListener("click", function() {
-      switchPage(this.id.replace(/tab-/, ""));
-    }));
-    function processInput(urlInput) {
-      disableAllInputs();
-      hideError();
-      if (!urlInput) {
-        showError("ERROR: You must enter a valid URL");
-        enableAllInputs();
-        return;
-      }
-      else {}
-      log(`Processing input: ${urlInput}`);
-      let chosenFileFormat = document.getElementById("select-file-format").options[document.getElementById("select-file-format").selectedIndex].value;
-      let chosenResolution = document.getElementById("select-video-res").options[document.getElementById("select-video-res").selectedIndex].value;
-      if (!urlInput.includes("/")) {
-        log("Input does not seem to be URL, prepending \"https://youtube.com/watch?v=\"");
-        urlInput = `https://youtube.com/watch?v=${urlInput}`;
-      }
-      else {}
-      log(`Final URL is: ${urlInput}`);
-      log(`Final file format is: ${chosenFileFormat}`);
-      log(`Final resolution is: ${chosenResolution}`);
-      log("Checking if specified configuration exists and updating video info area...");
-      fetch(`/getinfo?video_url=${urlInput}`).then(response => response.json()).then(jsonObj => {
-        if (urlInput.includes("youtube")) {
-          document.getElementById("yt-video-info").style.display = "block";
-          document.getElementById("yt-video-info-title").textContent = jsonObj.title;
-          document.getElementById("yt-video-info-title").textContent = jsonObj.title;
-          document.getElementById("yt-video-info-author-name").textContent = jsonObj.author.name;
-          document.getElementById("yt-video-info-author-user").textContent = jsonObj.author.user;
-          document.getElementById("yt-video-info-desc").textContent = jsonObj.description;
-          document.getElementById("yt-video-info-length").textContent = `${jsonObj.length_seconds} seconds`;
-          document.getElementById("yt-video-info-pubtime").textContent = (new Date(jsonObj.published)).toString();
-          document.getElementById("yt-video-info-agerestricted").textContent = jsonObj.age_restricted ? "\u26A0 Age-restricted" : "Not age-restricted";
-          document.getElementById("yt-video-info-id").textContent = jsonObj.video_id;
-        }
-        else {
-          document.getElementById("yt-video-info").style.display = "none";
-        }
-        let availableFormats = [];
-        if (chosenResolution == "any") {
-          availableFormats = jsonObj.formats.filter(format => (format.container == chosenFileFormat));
-        }
-        else {
-          availableFormats = jsonObj.formats.filter(format => (format.container == chosenFileFormat && format.qualityLabel && format.qualityLabel.startsWith(chosenResolution)));
-        }
-        if (availableFormats.length == 0) {
-          log("ERROR: Could not find video with specified format.");
-          showError("ERROR: Could not find video with specified format. Change options below and try again");
-        }
-        else {
-          log("Redirecting to download URL...");
-          location.href = `./downloader?video_url=${urlInput}&file_format=${chosenFileFormat}&resolution=${chosenResolution}`;
-        }
-        enableAllInputs();
-      }).catch(err => {
-        console.error("Error during checking process", err);
-      });
-    }
-    window.addEventListener("offline", event => {
-      document.getElementById("offline-error").style.display = "block";
-    });
-    window.addEventListener("online", event => {
-      document.getElementById("offline-error").style.display = "none";
-    });
-  </script>
 </html>
