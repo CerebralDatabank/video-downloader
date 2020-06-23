@@ -307,7 +307,13 @@
         let ytUrls = bulkInput.split("\n");
         for (const ytUrl of ytUrls) {
           log(`Redirecting to download URL for ${ytUrl}...`);
-          location.href = `./downloader?video_url=${ytUrl}&bulk=1`;
+          let aElem = document.createElement("a");
+          aElem.setAttribute("href", `./downloader?video_url=${ytUrl}&bulk=1`);
+          aElem.setAttribute("download", "");
+          aElem.style.setProperty("display", "none");
+          document.body.appendChild(aElem);
+          aElem.click();
+          aElem.remove();
         }
         enableAllInputs();
       }
