@@ -3,6 +3,7 @@
   <head>
     <title>Gopal's Video Downloader</title>
     <link rel="stylesheet" type="text/css" href="./gogo.css">
+    <link rel="stylesheet" type="text/css" href="./dialog-polyfill.css">
     <link rel="shortcut icon" type="image/png" href="./cdb-logo.png">
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <meta name="theme-color" content="#00AA00">
@@ -189,6 +190,7 @@
         <button class="gogo-btn gogo-btn-blue" onclick="this.parentElement.parentElement.close(); processBulkInput(document.getElementById('yt-bulk-input').value);">Got it, start downloading</button>
       </div>
     </dialog>
+    <script src="./dialog-polyfill.js"></script>
     <script>
       if ("serviceWorker" in navigator) {
         navigator.serviceWorker.register("./sw.js").then(() => {
@@ -331,6 +333,7 @@
       window.addEventListener("online", event => {
         document.getElementById("offline-error").style.display = "none";
       });
+      dialogPolyfill.registerDialog(document.getElementById("bulk-dld-dialog"));
     </script>
   </body>
 </html>
