@@ -32,7 +32,7 @@ app.get("/sw.js", (request, response) => {
 });
 
 app.get("/dialog-polyfill.js", (request, response) => {
-  response.sendFile("./dialog-polyfill.js");
+  response.sendFile("./dialog-polyfill.js", {root: __dirname});
 });
 
 app.get("/downloader", (request, response) => {
