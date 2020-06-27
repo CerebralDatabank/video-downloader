@@ -113,6 +113,9 @@
       select, option {
         font-size: 20px;
       }
+      dialog + .backdrop {
+        background: #80808080;
+      }
     </style>
   </head>
   <body onload="if (getURLParam('no-force-https') != '1' && location.protocol !== 'https:') {location.replace(`https:${location.href.substring(location.protocol.length)}`);} if (getURLParam('goto_tab')) {switchPage(getURLParam('goto_tab'));}">
