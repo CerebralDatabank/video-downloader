@@ -31,6 +31,10 @@ app.get("/sw.js", (request, response) => {
   response.sendFile("./sw.js", {root: __dirname});
 });
 
+app.get("/dialog-polyfill.js", (request, response) => {
+  response.sendFile("./dialog-polyfill.js");
+});
+
 app.get("/downloader", (request, response) => {
   if (request.query["bulk"] && request.query["bulk"] == "1") {
     response.header("Content-Disposition", `attachment; filename="downloaded-video.mp4"`);
