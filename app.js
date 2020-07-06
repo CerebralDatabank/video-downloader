@@ -62,11 +62,21 @@ app.get("/downloader", (request, response) => {
     let fileformat = request.query["file_format"];
     let resolution = request.query["resolution"];
     response.header("Content-Disposition", `attachment; filename="downloaded-video.${fileformat}"`);
-    if (resolution == "any") {
-      ytdl(url, {quality: "highest", filter: format => (format.container == fileformat)}).pipe(response);
+    if (request.query["streams"] == "video") {
+      if (resolution == "any") {
+        ytdl(url, {quality: "highest", filter: format => (format.container == fileformat && !format.audioBitrate)}).pipe(response);
+      }
+      else {
+        ytdl(url, {quality: "highest", filter: format => (format.container == fileformat && !format.audioBitrate && format.qualityLabel && format.qualityLabel.startsWith(resolution))}).pipe(response);
+      }
     }
     else {
-      ytdl(url, {quality: "highest", filter: format => (format.container == fileformat && format.qualityLabel && format.qualityLabel.startsWith(resolution))}).pipe(response);
+      if (resolution == "any") {
+        ytdl(url, {quality: "highest", filter: format => (format.container == fileformat)}).pipe(response);
+      }
+      else {
+        ytdl(url, {quality: "highest", filter: format => (format.container == fileformat && format.qualityLabel && format.qualityLabel.startsWith(resolution))}).pipe(response);
+      }
     }
   }
 });
