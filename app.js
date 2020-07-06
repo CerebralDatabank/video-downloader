@@ -44,6 +44,9 @@ app.get("/downloader", (request, response) => {
     response.header("Content-Disposition", `attachment; filename="downloaded-video.mp4"`);
     ytdl(request.query["video_url"], {quality: "highest", filter: format => format.container == "mp4"}).pipe(response);
   }
+  else if (request.query["itag"]) {
+    ytdl(request.query["video_url"], {quality: "highest", filter: format => format.itag == request.query["itag"]}).pipe(response);
+  }
   else if (!request.query["video_url"] || !request.query["file_format"] || !request.query["resolution"]) {
     response.status(400).sendFile("./http-400.html", {root: __dirname});
   }
