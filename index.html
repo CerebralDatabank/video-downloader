@@ -129,6 +129,7 @@
       <div id="tabs">
         <div class="tab tab-selected" id="tab-yt">YouTube&trade;</div>
         <div class="tab" id="tab-yt-bulk">Bulk YouTube&trade; <span class="badge">beta</span></div>
+        <div class="tab" id="tab-about">About</div>
       </div>
     </header>
     <div class="page" id="page-yt">
@@ -193,6 +194,12 @@
         <textarea id="yt-bulk-input"></textarea>
       </div>
       <button id="yt-bulk-dld-button" class="gogo-btn gogo-btn-green gogo-btn-bigaction" onclick="document.getElementById('bulk-dld-dialog').showModal();">Download Videos</button>
+    </div>
+    <div class="page" id="page-about" style="display: none;">
+      <h1>About</h1>
+      <p>Made by Gopal Othayoth.</p>
+      <p>Website: <a href="https://cerebraldatabank.neocities.org/">https://cerebraldatabank.neocities.org/</a></p>
+      <p>GitHub profile: <a href="https://github.com/CerebralDatabank" target="_blank">https://github.com/CerebralDatabank</a></p>
     </div>
     <div id="extras">
       <h2>Log</h2>
@@ -271,7 +278,7 @@
       }
       function switchPage(pageId) {
         /*pageId is the page or tab ID without the "page-" or "tab-" part.*/
-        ["yt", "yt-bulk"].forEach(elemId => {
+        ["yt", "yt-bulk", "about"].forEach(elemId => {
           document.getElementById(`page-${elemId}`).style.display = "none";
           document.getElementById(`tab-${elemId}`).classList.remove("tab-selected");
         });
