@@ -113,6 +113,10 @@
       select, option {
         font-size: 20px;
       }
+      optgroup {
+        font-weight: bold;
+        font-style: normal;
+      }
       dialog + .backdrop {
         background: #80808080;
       }
@@ -148,10 +152,22 @@
       </fieldset>
       <div id="file-format-options">
         <h2>Choose file format</h2>
-        <select id="select-file-format">
-          <option value="mp4" selected>MP4 (MPEG-4)</option>
-          <option value="webm">WEBM (WebM)</option>
-          <option value="flv">FLV (Flash Video)</option>
+        <select id="select-file-format" onchange="processFileFormatChange(this.options[this.selectedIndex]);">
+          <optgroup id="select-file-format_both" label="Video + audio formats">
+            <option value="mp4" selected>MP4 (MPEG-4)</option>
+            <option value="webm">WEBM (WebM)</option>
+            <option value="3gp">3GP (3GPP)</option>
+            <option value="flv">FLV (Flash Video)</option>
+            <option value="flv">TS (MPEG-2 Transport Stream)</option>
+          </optgroup>
+          <optgroup id="select-file-format_audio" label="Audio-only formats">
+            <option value="mp4|a">M4A (MPEG-4, audio only)</option>
+            <option value="webm|a">WEBM (WebM, audio only)</option>
+          </optgroup>
+          <optgroup id="select-file-format_video" label="Video-only formats">
+            <option value="mp4|v">MP4 (MPEG-4, video only)</option>
+            <option value="webm|v">WEBM (WebM, video only)</option>
+          </optgroup>
         </select>
       </div>
       <div id="video-options">
@@ -216,6 +232,14 @@
           else {}
         }
       }
+      function processFileFormatChange(selectedElem) {
+        if (selectedElem.parentElement.id == "select-file-format_audio") {
+          document.getElementById("video-options").style.display = "none";
+        }
+        else {
+          document.getElementById("video-options").style.display = "block";
+        }
+      }
       function timestamp() {
         let thedate = new Date();
         let day = String(thedate.getDate());
@@ -268,7 +292,17 @@
         }
         else {}
         log(`Processing input: ${urlInput}`);
+        let chosenStreams = "both";
         let chosenFileFormat = document.getElementById("select-file-format").options[document.getElementById("select-file-format").selectedIndex].value;
+        if (chosenFileFormat.endsWith("|a")) {
+          chosenStreams = "audio";
+          chosenFileFormat = chosenFileFormat.replace(/\|.+/, "");
+        }
+        else if (chosenFileFormat.endsWith("|v")) {
+          chosenStreams = "video";
+          chosenFileFormat = chosenFileFormat.replace(/\|.+/, "");
+        }
+        else {}
         let chosenResolution = document.getElementById("select-video-res").options[document.getElementById("select-video-res").selectedIndex].value;
         if (!urlInput.includes("/")) {
           log("Input does not seem to be URL, prepending \"https://youtube.com/watch?v=\"");
@@ -308,7 +342,7 @@
           }
           else {
             log("Redirecting to download URL...");
-            location.href = `./downloader?video_url=${urlInput}&file_format=${chosenFileFormat}&resolution=${chosenResolution}`;
+            location.href = `./downloader?video_url=${urlInput}&file_format=${chosenFileFormat}&resolution=${chosenResolution}&streams=${chosenStreams}`;
           }
           enableAllInputs();
         }).catch(err => {
