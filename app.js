@@ -45,7 +45,13 @@ app.get("/downloader", (request, response) => {
     ytdl(request.query["video_url"], {quality: "highest", filter: format => format.container == "mp4"}).pipe(response);
   }
   else if (request.query["itag"]) {
+    response.header("Content-Disposition", `attachment; filename="downloaded-video"`);
     ytdl(request.query["video_url"], {quality: "highest", filter: format => format.itag == request.query["itag"]}).pipe(response);
+  }
+  else if (request.query["video_url"] && request.query["file_format"] && request.query["streams"] && request.query["streams"] == "audio") {
+    let url = request.query["video_url"];
+    let fileformat = request.query["file_format"] == "m4a" ? "mp4" : request.query["file_format"];
+    ytdl(url, {quality: "highest", filter: format => (format.container == fileformat && !format.qualityLabel)}).pipe(response);
   }
   else if (!request.query["video_url"] || !request.query["file_format"] || !request.query["resolution"]) {
     response.status(400).sendFile("./http-400.html", {root: __dirname});
