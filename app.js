@@ -51,6 +51,7 @@ app.get("/downloader", (request, response) => {
   else if (request.query["video_url"] && request.query["file_format"] && request.query["streams"] && request.query["streams"] == "audio") {
     let url = request.query["video_url"];
     let fileformat = request.query["file_format"] == "m4a" ? "mp4" : request.query["file_format"];
+    response.header("Content-Disposition", `attachment; filename="downloaded-video.${request.query["file_format"]}"`);
     ytdl(url, {quality: "highest", filter: format => (format.container == fileformat && !format.qualityLabel)}).pipe(response);
   }
   else if (!request.query["video_url"] || !request.query["file_format"] || !request.query["resolution"]) {
