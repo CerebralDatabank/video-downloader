@@ -64,18 +64,18 @@ app.get("/downloader", (request, response) => {
     response.header("Content-Disposition", `attachment; filename="downloaded-video.${fileformat}"`);
     if (request.query["streams"] == "video") {
       if (resolution == "any") {
-        ytdl(url, {quality: "highest", filter: format => (format.container == fileformat && !format.audioBitrate)}).pipe(response);
+        ytdl(url, {quality: "highest", filter: format => ((format.container == fileformat) && !format.audioBitrate)}).pipe(response);
       }
       else {
-        ytdl(url, {quality: "highest", filter: format => (format.container == fileformat && !format.audioBitrate && format.qualityLabel && format.qualityLabel.startsWith(resolution))}).pipe(response);
+        ytdl(url, {quality: "highest", filter: format => ((format.container == fileformat) && !format.audioBitrate && format.qualityLabel && format.qualityLabel.startsWith(resolution))}).pipe(response);
       }
     }
     else {
       if (resolution == "any") {
-        ytdl(url, {quality: "highest", filter: format => (format.container == fileformat)}).pipe(response);
+        ytdl(url, {quality: "highest", filter: format => ((format.container == fileformat) && format.audioBitrate && format.qualityLabel)}).pipe(response);
       }
       else {
-        ytdl(url, {quality: "highest", filter: format => (format.container == fileformat && format.qualityLabel && format.qualityLabel.startsWith(resolution))}).pipe(response);
+        ytdl(url, {quality: "highest", filter: format => ((format.container == fileformat) && format.audioBitrate && format.qualityLabel && format.qualityLabel.startsWith(resolution))}).pipe(response);
       }
     }
   }
