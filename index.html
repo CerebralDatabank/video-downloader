@@ -337,11 +337,21 @@
             document.getElementById("yt-video-info").style.display = "none";
           }
           let availableFormats = [];
-          if (chosenResolution == "any") {
-            availableFormats = jsonObj.formats.filter(format => (format.container == chosenFileFormat));
+          if (chosenStreams == "video") {
+            if (chosenResolution == "any") {
+              availableFormats = jsonObj.formats.filter(format => ((format.container == chosenFileFormat) && !format.audioBitrate));
+            }
+            else {
+              availableFormats = jsonObj.formats.filter(format => ((format.container == chosenFileFormat) && !format.audioBitrate && format.qualityLabel && format.qualityLabel.startsWith(resolution)));
+            }
           }
           else {
-            availableFormats = jsonObj.formats.filter(format => (format.container == chosenFileFormat && format.qualityLabel && format.qualityLabel.startsWith(chosenResolution)));
+            if (chosenResolution == "any") {
+              availableFormats = jsonObj.formats.filter(format => ((format.container == chosenFileFormat) && format.audioBitrate && format.qualityLabel));
+            }
+            else {
+              availableFormats = jsonObj.formats.filter(format => ((format.container == chosenFileFormat) && format.audioBitrate && format.qualityLabel && format.qualityLabel.startsWith(resolution)));
+            }
           }
           if (availableFormats.length == 0) {
             log("ERROR: Could not find video with specified format.");
