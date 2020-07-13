@@ -135,7 +135,7 @@
     <div class="page" id="page-yt">
       <h1>YouTube&trade; Downloader</h1>
       <div style="display: flex;">
-        <input type="text" id="url-input" placeholder="Video URL or YouTube&trade; Video ID" spellcheck="false" autofocus>
+      <input type="text" id="url-input" placeholder="Video URL or YouTube&trade; Video ID" spellcheck="false" onkeypress="if (event.key == 'Enter') {document.getElementById('url-input-submit').click();} else {}" autofocus>
         <button id="url-input-submit" onclick="processInput(document.getElementById('url-input').value);">Download Video</button>
       </div>
       <p><small>Or, <span style="color: #00F; cursor: pointer;" onclick="if (document.getElementById('url-input').disabled == true) {} else {document.getElementById('url-input').value = 'https:\/\/www.youtube.com\/watch?v=QAUzWtLMnU0';}">load a test YouTube URL (with max quality of 1080p) &#x2B0F;</span></small></p>
