@@ -26,7 +26,7 @@
         color: #FFF;
         padding: 10px 10px 0 10px;
       }
-      #url-input {
+      #yt-url-input {
         background: #EEE;
         border: none;
         color: #333;
@@ -35,7 +35,7 @@
         width: 350px;
         padding: 5px 10px;
       }
-      #url-input-submit {
+      #yt-url-input-submit {
         background: #0C0;
         border: none;
         color: #FFF;
@@ -43,13 +43,13 @@
         border-radius: 0 4px 4px 0;
         padding: 5px 10px;
       }
-      #url-input-submit:hover {
+      #yt-url-input-submit:hover {
         background: #0A0;
       }
-      #url-input-submit:active {
+      #yt-url-input-submit:active {
         background: #008000;
       }
-      #url-input-submit:disabled {
+      #yt-url-input-submit:disabled {
         background: #0C0;
         opacity: 0.6;
       }
@@ -135,10 +135,10 @@
     <div class="page" id="page-yt">
       <h1>YouTube&trade; Downloader</h1>
       <div style="display: flex;">
-      <input type="text" id="url-input" placeholder="Video URL or YouTube&trade; Video ID" spellcheck="false" onkeypress="if (event.key == 'Enter') {document.getElementById('url-input-submit').click();} else {}" autofocus>
-        <button id="url-input-submit" onclick="processInput(document.getElementById('url-input').value);">Download Video</button>
+      <input type="text" id="yt-url-input" placeholder="Video URL or YouTube&trade; Video ID" spellcheck="false" onkeypress="if (event.key == 'Enter') {document.getElementById('yt-url-input-submit').click();} else {}" autofocus>
+        <button id="yt-url-input-submit" onclick="processInput(document.getElementById('yt-url-input').value);">Download Video</button>
       </div>
-      <p><small>Or, <span style="color: #00F; cursor: pointer;" onclick="if (document.getElementById('url-input').disabled == true) {} else {document.getElementById('url-input').value = 'https:\/\/www.youtube.com\/watch?v=QAUzWtLMnU0';}">load a test YouTube URL (with max quality of 1080p) &#x2B0F;</span></small></p>
+      <p><small>Or, <span style="color: #00F; cursor: pointer;" onclick="if (document.getElementById('yt-url-input').disabled == true) {} else {document.getElementById('yt-url-input').value = 'https:\/\/www.youtube.com\/watch?v=QAUzWtLMnU0';}">load a test YouTube URL (with max quality of 1080p) &#x2B0F;</span></small></p>
       <p id="error" style="color: #F00; font-weight: bold; display: none;">Unknown error, try checking log</p>
       <p id="offline-error" style="color: #F00; font-weight: bold; display: none;">WARNING: You appear to be offline. Check your Internet connection.</p>
       <fieldset id="yt-video-info" style="border: 2px solid #000; max-width: 600px; display: none;">
@@ -173,7 +173,7 @@
       </div>
       <div id="video-options">
         <h2>Choose video resolution</h2>
-        <select id="select-video-res">
+        <select id="yt-select-video-res">
           <option value="any" selected>Any resolution</option>
           <option value="4320p">7680&times;4320 (4320p / 8K Ultra HD)</option>
           <option value="2160p">3840&times;2160 (2160p / 4K Ultra HD)</option>
@@ -267,12 +267,12 @@
         document.getElementById("error").style.display = "none";
       }
       function disableAllInputs() {
-        ["url-input", "url-input-submit", "select-file-format", "select-video-res", "yt-bulk-input", "yt-bulk-dld-button"].forEach(elemId => {
+        ["yt-url-input", "yt-url-input-submit", "select-file-format", "yt-select-video-res", "yt-bulk-input", "yt-bulk-dld-button"].forEach(elemId => {
           document.getElementById(elemId).disabled = true;
         });
       }
       function enableAllInputs() {
-        ["url-input", "url-input-submit", "select-file-format", "select-video-res", "yt-bulk-input", "yt-bulk-dld-button"].forEach(elemId => {
+        ["yt-url-input", "yt-url-input-submit", "select-file-format", "yt-select-video-res", "yt-bulk-input", "yt-bulk-dld-button"].forEach(elemId => {
           document.getElementById(elemId).disabled = false;
         });
       }
@@ -310,7 +310,7 @@
           chosenFileFormat = chosenFileFormat.replace(/\|.+/, "");
         }
         else {}
-        let chosenResolution = document.getElementById("select-video-res").options[document.getElementById("select-video-res").selectedIndex].value;
+        let chosenResolution = document.getElementById("yt-select-video-res").options[document.getElementById("yt-select-video-res").selectedIndex].value;
         if (!urlInput.includes("/")) {
           log("Input does not seem to be URL, prepending \"https://youtube.com/watch?v=\"");
           urlInput = `https://youtube.com/watch?v=${urlInput}`;
